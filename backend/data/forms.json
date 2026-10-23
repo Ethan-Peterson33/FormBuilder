@@ -1,0 +1,62 @@
+[
+  {
+    "id": "contact-form",
+    "name": "Contact Form",
+    "description": "A simple contact information form",
+    "fields": [
+      {
+        "id": "firstName",
+        "type": "text",
+        "label": "First Name",
+        "required": true,
+        "placeholder": "Enter first name"
+      },
+      {
+        "id": "lastName",
+        "type": "text",
+        "label": "Last Name",
+        "required": true,
+        "placeholder": "Enter last name"
+      },
+      {
+        "id": "email",
+        "type": "text",
+        "label": "Email",
+        "required": false,
+        "placeholder": "Enter email"
+      },
+      {
+        "id": "explain",
+        "type": "textarea",
+        "label": "Explain why you are reaching out",
+        "required": false,
+        "placeholder": "Enter email"
+      },
+      {
+        "id": "contactMethod",
+        "type": "select",
+        "label": "Preferred Contact Method",
+        "required": false,
+        "options": [
+          "Email",
+          "Phone",
+          "Text"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "",
+    "name": "Contact Form",
+    "description": "",
+    "fields": [
+      {
+        "id": "field-b41ed818-e9cf-497b-8fc8-a2a94316a4aa",
+        "type": "text",
+        "label": "Name",
+        "required": true,
+        "placeholder": ""
+      }
+    ]
+  }
+]
