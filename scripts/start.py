@@ -10,10 +10,12 @@ What it does, in order:
    ``backend/requirements.txt`` when they changed.
 2. Re-runs itself inside that virtualenv.
 3. Finds PostgreSQL: ``DATABASE_URL`` (flag, environment, ``.env``), then any
-   running Docker container with a postgres image (from any directory), then
-   localhost on the usual ports. Every candidate is tested with a real
-   connection. If nothing answers and Docker is available, starts this
-   repository's ``docker compose`` service and waits for it.
+    running Docker container with a postgres image (from any directory), then
+    localhost on the usual ports. Every candidate is tested with a real
+    connection. If nothing answers and Docker is available, starts this
+    repository's ``docker compose`` service and waits for it. In GitHub
+    Codespaces, Docker discovery and automatic container startup are disabled;
+    configure ``DATABASE_URL`` for the PostgreSQL instance already in use.
 4. Updates ``.env`` so ``DATABASE_URL`` (and ``POSTGRES_*``) point at the
    instance that works. The backend, the ``db.*`` tools and pytest read
    ``.env`` themselves, so everything afterwards agrees.
@@ -93,6 +95,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return args
 
 
+def running_in_codespaces() -> bool:
+    return os.environ.get("CODESPACES", "").lower() == "true"
+
+
 # =============================================================================
 # Stage 1: interpreter, virtualenv, dependencies (standard library only)
 # =============================================================================
@@ -134,8 +140,18 @@ def stage1(args: argparse.Namespace) -> int:
     step("Dependencies")
     digest = hashlib.sha256(REQUIREMENTS.read_bytes()).hexdigest()
     if args.reinstall or not STAMP.exists() or STAMP.read_text().strip() != digest:
+        pip_command = [str(python), "-m", "pip"]
+        pip_check = run([*pip_command, "--version"], capture_output=True)
+        if pip_check.returncode != 0:
+            pip_command = [str(executable), "-m", "pip", "--python", str(python)]
+            pip_check = run([*pip_command, "--version"], capture_output=True)
+            if pip_check.returncode != 0:
+                fail("pip is missing from the virtualenv and unavailable from the selected Python")
+                info("Install pip for the selected Python, then rerun scripts/start.py.")
+                return 1
+            info("Virtualenv has no pip; using the selected Python's pip to install into it")
         info(f"pip install -r {REQUIREMENTS}")
-        result = run([str(python), "-m", "pip", "install", "--disable-pip-version-check", "-q", "-r", str(REQUIREMENTS)])
+        result = run([*pip_command, "install", "--disable-pip-version-check", "-q", "-r", str(REQUIREMENTS)])
         if result.returncode != 0:
             fail("pip install failed (see output above)")
             return 1
@@ -183,7 +199,10 @@ def stage2(args: argparse.Namespace) -> int:
     step("PostgreSQL")
     dotenv = read_env_file(ENV_FILE)
     env_url = os.environ.get("DATABASE_URL")
-    docker = "disabled" if args.no_docker else docker_state()
+    codespaces = running_in_codespaces()
+    if codespaces:
+        info("Codespaces detected; Docker discovery and automatic PostgreSQL startup are disabled.")
+    docker = "disabled" if args.no_docker or codespaces else docker_state()
     use_docker = docker == "ok"
     if docker == "absent":
         info("Docker is not installed; only URLs and localhost ports are considered")
@@ -226,7 +245,9 @@ def stage2(args: argparse.Namespace) -> int:
 
     if chosen is None:
         fail("No PostgreSQL instance answered.")
-        if containers:
+        if codespaces or args.no_docker:
+            info("Set DATABASE_URL in the environment or root .env, or pass --database-url for this run.")
+        elif containers:
             info("Containers seen (docker ps -a): " + "; ".join(c.summary for c in containers))
             info("Start one with `docker start NAME`, or pick it with --container NAME.")
         elif docker == "daemon-down":

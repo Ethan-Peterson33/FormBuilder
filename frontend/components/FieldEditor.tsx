@@ -1,6 +1,5 @@
 "use client";
 
-<<<<<<< HEAD
 import { useState } from "react";
 
 import LogicEditor from "@/components/LogicEditor";
@@ -15,17 +14,10 @@ import {
   type OptionRename,
 } from "@/lib/options";
 import type { FieldConfig, FieldType } from "@/lib/types";
-=======
-import {
-  FieldConfig,
-  FieldType,
-} from "../components/FormRender";
->>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
 
 type FieldEditorProps = {
   field: FieldConfig;
   index: number;
-<<<<<<< HEAD
   /** Every field in the form, in order. Used to offer earlier fields as logic sources. */
   allFields: FieldConfig[];
   onChange: (index: number, updates: Partial<FieldConfig>) => void;
@@ -39,19 +31,11 @@ type FieldEditorProps = {
   onMove?: (index: number, direction: -1 | 1) => void;
   /** Logic problems detected for this field (see `findLogicProblems`). */
   problems?: LogicProblem[];
-=======
-  onChange: (
-    index: number,
-    updates: Partial<FieldConfig>
-  ) => void;
-  onRemove: (index: number) => void;
->>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
 };
 
 export default function FieldEditor({
   field,
   index,
-<<<<<<< HEAD
   allFields,
   onChange,
   onOptionsChange,
@@ -89,11 +73,6 @@ export default function FieldEditor({
     onRemove(index);
   }
 
-=======
-  onChange,
-  onRemove,
-}: FieldEditorProps) {
->>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
   const inputClass =
     "mt-2 w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:ring-4 focus:ring-slate-100";
 
@@ -105,7 +84,6 @@ export default function FieldEditor({
             Field {index + 1}
           </p>
 
-<<<<<<< HEAD
           <h4 className="mt-1 flex flex-wrap items-center gap-2 font-semibold text-slate-900">
             {field.label || "Untitled Field"}
             {problemCount > 0 && (
@@ -209,33 +187,11 @@ export default function FieldEditor({
       <div className="space-y-5">
         <div>
           <label htmlFor={`${field.id}-label`} className="block text-sm font-medium text-slate-700">
-=======
-          <h4 className="mt-1 font-semibold text-slate-900">
-            {field.label || "Untitled Field"}
-          </h4>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => onRemove(index)}
-          className="rounded-lg px-3 py-1.5 text-sm font-medium text-rose-600 transition hover:bg-rose-50"
-        >
-          Remove
-        </button>
-      </div>
-
-      <div className="space-y-5">
-        <div>
-          <label className="block text-sm font-medium text-slate-700">
->>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
             Label
           </label>
 
           <input
-<<<<<<< HEAD
             id={`${field.id}-label`}
-=======
->>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
             value={field.label}
             onChange={(e) =>
               onChange(index, {
@@ -248,19 +204,12 @@ export default function FieldEditor({
         </div>
 
         <div>
-<<<<<<< HEAD
           <label htmlFor={`${field.id}-type`} className="block text-sm font-medium text-slate-700">
-=======
-          <label className="block text-sm font-medium text-slate-700">
->>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
             Field Type
           </label>
 
           <select
-<<<<<<< HEAD
             id={`${field.id}-type`}
-=======
->>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
             value={field.type}
             onChange={(e) =>
               onChange(index, {
@@ -274,7 +223,6 @@ export default function FieldEditor({
             <option value="number">Number</option>
             <option value="date">Date</option>
             <option value="select">Dropdown</option>
-<<<<<<< HEAD
             <option value="radio">Radio Buttons</option>
             <option value="checkbox">Checkbox (Yes/No)</option>
           </select>
@@ -283,22 +231,11 @@ export default function FieldEditor({
         {!["date", "select", "radio", "checkbox"].includes(field.type) && (
           <div>
             <label htmlFor={`${field.id}-placeholder`} className="block text-sm font-medium text-slate-700">
-=======
-          </select>
-        </div>
-
-        {field.type !== "date" && (
-          <div>
-            <label className="block text-sm font-medium text-slate-700">
->>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
               Placeholder
             </label>
 
             <input
-<<<<<<< HEAD
               id={`${field.id}-placeholder`}
-=======
->>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
               value={field.placeholder ?? ""}
               onChange={(e) =>
                 onChange(index, {
@@ -311,7 +248,6 @@ export default function FieldEditor({
           </div>
         )}
 
-<<<<<<< HEAD
         {isChoiceField && (
           <div>
             <div className="flex items-start justify-between gap-3">
@@ -357,32 +293,6 @@ export default function FieldEditor({
                 onClose={() => setManageOpen(false)}
               />
             )}
-=======
-        {field.type === "select" && (
-          <div>
-            <label className="block text-sm font-medium text-slate-700">
-              Options
-            </label>
-
-            <p className="mt-1 text-xs text-slate-400">
-              Enter one option per line.
-            </p>
-
-            <textarea
-              rows={5}
-              value={field.options?.join("\n") ?? ""}
-              onChange={(e) =>
-                onChange(index, {
-                  options: e.target.value
-                    .split("\n")
-                    .map((option) => option.trim())
-                    .filter(Boolean),
-                })
-              }
-              placeholder={"Email\nPhone\nText"}
-              className={`${inputClass} resize-y`}
-            />
->>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
           </div>
         )}
 
@@ -403,7 +313,6 @@ export default function FieldEditor({
           </span>
         </label>
 
-<<<<<<< HEAD
         <LogicEditor
           field={field}
           sourceFields={availableSourceFields(allFields, index)}
@@ -412,18 +321,12 @@ export default function FieldEditor({
           onChange={(logic) => onChange(index, { logic })}
         />
 
-=======
->>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
         <div className="rounded-xl bg-slate-50 px-4 py-3">
           <p className="text-xs leading-5 text-slate-500">
             Changes here update this field&apos;s configuration object in React
             state. The live preview then re-renders from the updated
-<<<<<<< HEAD
             configuration - try answering the preview to see conditional fields
             appear.
-=======
-            configuration.
->>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
           </p>
         </div>
       </div>

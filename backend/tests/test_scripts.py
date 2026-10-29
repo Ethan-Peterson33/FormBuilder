@@ -415,6 +415,22 @@ def test_start_stage2_reports_daemon_down(isolated_start, fake_docker, capsys):
     assert "daemon is not running" in captured.out and "Start Docker" in captured.out
 
 
+def test_start_stage2_in_codespaces_does_not_inspect_or_start_docker(isolated_start, fake_docker, monkeypatch, capsys):
+    import start
+
+    monkeypatch.setenv("CODESPACES", "true")
+    fake_docker.set_containers({"team-db": _container("team-db", "postgres:16", "exited", 1, "u", "p", "d")})
+    monkeypatch.setattr(start, "docker_state", lambda: pytest.fail("Docker should not be inspected in Codespaces"))
+
+    code = isolated_start.main(["--stage2", "--no-serve"])
+    captured = capsys.readouterr()
+
+    assert code == 1
+    assert "Codespaces detected" in captured.out
+    assert "Set DATABASE_URL" in captured.out
+    assert fake_docker.status("team-db") == "exited"
+
+
 def test_start_stage2_unknown_container_name(isolated_start, fake_docker, capsys):
     code = isolated_start.main(["--stage2", "--no-serve", "--container", "nope"])
     assert code == 1 and "no container named 'nope'" in capsys.readouterr().err

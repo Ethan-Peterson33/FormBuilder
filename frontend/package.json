@@ -6,14 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-<<<<<<< HEAD
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "next typegen && tsc --noEmit"
-=======
-    "lint": "eslint"
->>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
   },
   "dependencies": {
     "html2canvas": "^1.4.1",
@@ -24,7 +20,6 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-<<<<<<< HEAD
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
@@ -39,14 +34,5 @@
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^3.2.7"
-=======
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.3.4",
-    "tailwindcss": "^4",
-    "typescript": "^5"
->>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
   }
 }
