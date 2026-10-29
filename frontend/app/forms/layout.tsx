@@ -9,14 +9,20 @@ export default function FormsLayout({
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+<<<<<<< HEAD
           <Link href="/" className="group">
             <h1 className="text-lg font-semibold tracking-tight group-hover:text-slate-700">
+=======
+          <div>
+            <h1 className="text-lg font-semibold tracking-tight">
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
               Form Studio
             </h1>
 
             <p className="text-xs text-slate-500">
               Build and manage dynamic forms
             </p>
+<<<<<<< HEAD
           </Link>
 
           <nav className="flex items-center gap-4 text-sm text-slate-500">
@@ -30,6 +36,13 @@ export default function FormsLayout({
               Builder
             </Link>
           </nav>
+=======
+          </div>
+
+          <div className="text-sm text-slate-500">
+            ImageEndpoint
+          </div>
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
         </div>
       </header>
 
@@ -49,6 +62,7 @@ export default function FormsLayout({
             >
               Form Builder
             </Link>
+<<<<<<< HEAD
 
             <Link
               href="/forms/submissions"
@@ -63,6 +77,8 @@ export default function FormsLayout({
             >
               Option Library
             </Link>
+=======
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
           </nav>
         </aside>
 

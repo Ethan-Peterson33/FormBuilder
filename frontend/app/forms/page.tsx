@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import ProcessGuide from "@/components/ProcessGuide";
 
+<<<<<<< HEAD
 import type { ApiError, FormConfig } from "@/lib/types";
 
 export default function FormsPage() {
@@ -44,6 +45,32 @@ if (error) {
       {error}
     </div>
   );
+=======
+type FormConfig = {
+  id: string;
+  name: string;
+  description?: string;
+};
+
+export default function FormsPage() {
+    const [forms, setForms] = useState<FormConfig[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function loadForms() {
+            const response = await fetch("/api/forms");
+            const data = await response.json();
+
+            setForms(data);
+            setLoading(false);
+        }
+
+        loadForms();
+    }, []);
+
+if (loading) {
+  return <p>Loading forms...</p>;
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
 }
 
 
@@ -106,7 +133,11 @@ return (
             <div className="flex-1">
               <div className="mb-4 flex items-start justify-between">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-sm font-semibold text-slate-700">
+<<<<<<< HEAD
                   {form.fields?.length ?? 0}
+=======
+                  
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
                 </div>
 
                 <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700">
@@ -125,6 +156,7 @@ return (
               )}
             </div>
 
+<<<<<<< HEAD
             <div className="mt-6 space-y-3 border-t border-slate-100 pt-4">
               <span className="block truncate font-mono text-xs text-slate-400" title={form.id}>
                 {form.id}
@@ -153,6 +185,19 @@ return (
                   View form →
                 </Link>
               </div>
+=======
+            <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
+              <span className="text-xs text-slate-400">
+                {form.id}
+              </span>
+
+              <Link
+                href={`/forms/${form.id}`}
+                className="text-sm font-medium text-slate-900 transition group-hover:translate-x-0.5"
+              >
+                View form →
+              </Link>
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
             </div>
           </div>
         ))}

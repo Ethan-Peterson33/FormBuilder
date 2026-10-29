@@ -30,7 +30,11 @@
         "type": "textarea",
         "label": "Explain why you are reaching out",
         "required": false,
+<<<<<<< HEAD
         "placeholder": "Tell us a little about your request"
+=======
+        "placeholder": "Enter email"
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
       },
       {
         "id": "contactMethod",
@@ -46,6 +50,7 @@
     ]
   },
   {
+<<<<<<< HEAD
     "id": "pet-registration",
     "name": "Pet Registration",
     "description": "Demonstrates conditional logic: follow-up questions only appear when earlier answers call for them.",
@@ -291,3 +296,19 @@
     "updatedAt": "2026-10-25T16:23:22.700Z"
   }
 ]
+=======
+    "id": "",
+    "name": "Contact Form",
+    "description": "",
+    "fields": [
+      {
+        "id": "field-b41ed818-e9cf-497b-8fc8-a2a94316a4aa",
+        "type": "text",
+        "label": "Name",
+        "required": true,
+        "placeholder": ""
+      }
+    ]
+  }
+]
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71

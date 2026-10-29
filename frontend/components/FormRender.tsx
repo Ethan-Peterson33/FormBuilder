@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import { useMemo, useState, type FormEvent } from "react";
@@ -13,10 +14,33 @@ export type FormSubmitPayload = {
   data: FormValues;
   /** Ids of fields hidden by conditional logic at submit time. */
   hiddenFields: string[];
+=======
+export type FieldType =
+  | "text"
+  | "textarea"
+  | "number"
+  | "date"
+  | "select";
+
+export type FieldConfig = {
+  id: string;
+  type: FieldType;
+  label: string;
+  required?: boolean;
+  placeholder?: string;
+  options?: string[];
+};
+export type FormConfig = {
+  id: string;
+  name: string;
+  description?: string;
+  fields: FieldConfig[];
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
 };
 
 type FormRendererProps = {
   config: FormConfig;
+<<<<<<< HEAD
   /** Called with cleaned answers when the form is submitted. May return a promise. */
   onSubmit?: (payload: FormSubmitPayload) => void | Promise<void>;
   /** Initial answers (e.g. when re-opening a draft). */
@@ -71,6 +95,18 @@ export default function FormRenderer({
   function renderField(field: FieldConfig) {
     const value = values[field.id];
 
+=======
+};
+
+const inputClass =
+  "mt-2 w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:ring-4 focus:ring-slate-100";
+
+export default function FormRenderer({
+  config,
+}: FormRendererProps) {
+
+  function renderField(field: FieldConfig) {
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
     switch (field.type) {
       case "text":
         return (
@@ -81,9 +117,12 @@ export default function FormRenderer({
             type="text"
             placeholder={field.placeholder}
             required={field.required}
+<<<<<<< HEAD
             disabled={isDisabled}
             value={typeof value === "string" ? value : ""}
             onChange={(e) => setValue(field.id, e.target.value)}
+=======
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
           />
         );
 
@@ -92,6 +131,7 @@ export default function FormRenderer({
           <textarea
             id={field.id}
             name={field.id}
+<<<<<<< HEAD
             className={`${inputClass} resize-y`}
             placeholder={field.placeholder}
             required={field.required}
@@ -99,6 +139,11 @@ export default function FormRenderer({
             rows={3}
             value={typeof value === "string" ? value : ""}
             onChange={(e) => setValue(field.id, e.target.value)}
+=======
+              className={`${inputClass} resize-y`}
+            placeholder={field.placeholder}
+            required={field.required}
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
           />
         );
 
@@ -109,6 +154,7 @@ export default function FormRenderer({
             name={field.id}
             className={inputClass}
             type="number"
+<<<<<<< HEAD
             step="any"
             placeholder={field.placeholder}
             required={field.required}
@@ -119,6 +165,10 @@ export default function FormRenderer({
               const parsed = e.target.valueAsNumber;
               setValue(field.id, raw === "" ? "" : Number.isNaN(parsed) ? raw : parsed);
             }}
+=======
+            placeholder={field.placeholder}
+            required={field.required}
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
           />
         );
 
@@ -130,9 +180,12 @@ export default function FormRenderer({
             className={inputClass}
             type="date"
             required={field.required}
+<<<<<<< HEAD
             disabled={isDisabled}
             value={typeof value === "string" ? value : ""}
             onChange={(e) => setValue(field.id, e.target.value)}
+=======
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
           />
         );
 
@@ -143,6 +196,7 @@ export default function FormRenderer({
             name={field.id}
             className={inputClass}
             required={field.required}
+<<<<<<< HEAD
             disabled={isDisabled}
             value={typeof value === "string" ? value : ""}
             onChange={(e) => setValue(field.id, e.target.value)}
@@ -151,12 +205,25 @@ export default function FormRenderer({
 
             {field.options?.map((option) => (
               <option key={option} value={option}>
+=======
+          >
+            <option value="">
+              Select an option
+            </option>
+
+            {field.options?.map((option) => (
+              <option
+                key={option}
+                value={option}
+              >
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
                 {option}
               </option>
             ))}
           </select>
         );
 
+<<<<<<< HEAD
       case "radio":
         return (
           <div
@@ -263,3 +330,33 @@ export default function FormRenderer({
     </form>
   );
 }
+=======
+      default:
+        return (
+          <p>
+            Unknown field type: {field.type}
+          </p>
+        );
+    }
+  }
+
+  return (
+    <form>
+      {config.fields.map((field) => (
+        <div key={field.id}>
+          <label htmlFor={field.id}>
+            {field.label}
+            {field.required && " *"}
+          </label>
+
+          {renderField(field)}
+        </div>
+      ))}
+
+      <button type="submit">
+        Submit
+      </button>
+    </form>
+  );
+}
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71

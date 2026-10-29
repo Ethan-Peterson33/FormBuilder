@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Form, Table, and Workflow Builder
 
 An internal application for building forms, editing data tables, and designing workflows. The project uses a Next.js frontend and a FastAPI backend. It is intended to replace a vendor product for company use.
@@ -390,3 +391,13 @@ The rules engine exists twice on purpose - `frontend/lib/formLogic.ts` (live sho
 - Data tables: build out [docs/data-tables.md](docs/data-tables.md) (table endpoints, rows, querying, then the grid UI).
 - Authentication, so `submittedBy` is populated from the signed-in user (schema plan phase 2: `users`, attribution columns, `form_versions`).
 - Workflow builder (schema plan phase 4).
+=======
+Just a simple FastAPI endpoint to send images to form for a pdf creation.
+
+
+front end start
+npm run dev -- --hostname 0.0.0.0
+
+backend start
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+>>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
