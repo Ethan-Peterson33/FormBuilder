@@ -1,0 +1,293 @@
+[
+  {
+    "id": "contact-form",
+    "name": "Contact Form",
+    "description": "A simple contact information form",
+    "fields": [
+      {
+        "id": "firstName",
+        "type": "text",
+        "label": "First Name",
+        "required": true,
+        "placeholder": "Enter first name"
+      },
+      {
+        "id": "lastName",
+        "type": "text",
+        "label": "Last Name",
+        "required": true,
+        "placeholder": "Enter last name"
+      },
+      {
+        "id": "email",
+        "type": "text",
+        "label": "Email",
+        "required": false,
+        "placeholder": "Enter email"
+      },
+      {
+        "id": "explain",
+        "type": "textarea",
+        "label": "Explain why you are reaching out",
+        "required": false,
+        "placeholder": "Tell us a little about your request"
+      },
+      {
+        "id": "contactMethod",
+        "type": "select",
+        "label": "Preferred Contact Method",
+        "required": false,
+        "options": [
+          "Email",
+          "Phone",
+          "Text"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pet-registration",
+    "name": "Pet Registration",
+    "description": "Demonstrates conditional logic: follow-up questions only appear when earlier answers call for them.",
+    "fields": [
+      {
+        "id": "field-09c2cd31-ddca-4b4a-93d2-95be0481f43e",
+        "type": "select",
+        "label": "Property",
+        "required": true,
+        "placeholder": "",
+        "options": [
+          "Property 1",
+          "Property 2",
+          "Property 3"
+        ]
+      },
+      {
+        "id": "residentName",
+        "type": "text",
+        "label": "Resident Name",
+        "required": true,
+        "placeholder": "Full name"
+      },
+      {
+        "id": "moveInDate",
+        "type": "date",
+        "label": "Move-in Date",
+        "required": true
+      },
+      {
+        "id": "earlyMoveInNote",
+        "type": "textarea",
+        "label": "Your move-in date is before 2024. Has your lease been renewed?",
+        "required": false,
+        "logic": {
+          "action": "show",
+          "match": "all",
+          "conditions": [
+            {
+              "fieldId": "moveInDate",
+              "operator": "before",
+              "value": "2024-01-01"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hasPet",
+        "type": "radio",
+        "label": "Do you have a pet?",
+        "required": true,
+        "options": [
+          "Yes",
+          "No"
+        ]
+      },
+      {
+        "id": "petType",
+        "type": "select",
+        "label": "Type of pet",
+        "required": true,
+        "options": [
+          "Dog",
+          "Cat",
+          "Bird",
+          "Other"
+        ],
+        "logic": {
+          "action": "show",
+          "match": "all",
+          "conditions": [
+            {
+              "fieldId": "hasPet",
+              "operator": "equals",
+              "value": "Yes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "petTypeOther",
+        "type": "text",
+        "label": "Please describe your pet",
+        "required": true,
+        "placeholder": "e.g. rabbit",
+        "logic": {
+          "action": "show",
+          "match": "all",
+          "conditions": [
+            {
+              "fieldId": "petType",
+              "operator": "equals",
+              "value": "Other"
+            }
+          ]
+        }
+      },
+      {
+        "id": "petWeight",
+        "type": "number",
+        "label": "Pet weight (lbs)",
+        "required": true,
+        "placeholder": "0",
+        "logic": {
+          "action": "show",
+          "match": "all",
+          "conditions": [
+            {
+              "fieldId": "petType",
+              "operator": "is_one_of",
+              "value": [
+                "Dog",
+                "Cat"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "largePetDeposit",
+        "type": "checkbox",
+        "label": "I acknowledge the additional deposit for pets over 50 lbs",
+        "required": true,
+        "logic": {
+          "action": "show",
+          "match": "all",
+          "conditions": [
+            {
+              "fieldId": "petWeight",
+              "operator": "greater_than",
+              "value": 50
+            }
+          ]
+        }
+      },
+      {
+        "id": "comments",
+        "type": "textarea",
+        "label": "Anything else?",
+        "required": false,
+        "placeholder": "Optional"
+      }
+    ],
+    "updatedAt": "2026-10-25T16:34:52.425Z"
+  },
+  {
+    "id": "incident-report",
+    "name": "Incident Report",
+    "description": "",
+    "fields": [
+      {
+        "id": "field-b59ec85c-952e-4e28-ba73-5524dc73f370",
+        "type": "select",
+        "label": "Property",
+        "required": true,
+        "placeholder": "",
+        "options": [
+          "Property 2",
+          "Property 1",
+          "Property 3"
+        ]
+      },
+      {
+        "id": "field-6d07a4bb-b2a6-4d8e-b1a9-57f0f9b03469",
+        "type": "date",
+        "label": "Incident Date",
+        "required": true,
+        "placeholder": "",
+        "logic": {
+          "action": "show",
+          "match": "all",
+          "conditions": [
+            {
+              "fieldId": "field-b59ec85c-952e-4e28-ba73-5524dc73f370",
+              "operator": "is_not_empty"
+            }
+          ]
+        }
+      },
+      {
+        "id": "field-be3c1cf0-38aa-407a-b044-5c09b6b1c5cd",
+        "type": "textarea",
+        "label": "Describe the Incident",
+        "required": true,
+        "placeholder": "",
+        "logic": {
+          "action": "show",
+          "match": "all",
+          "conditions": [
+            {
+              "fieldId": "field-b59ec85c-952e-4e28-ba73-5524dc73f370",
+              "operator": "is_not_empty"
+            }
+          ]
+        }
+      },
+      {
+        "id": "field-b4f768fb-e85f-40fe-be7b-7e3d3311f087",
+        "type": "radio",
+        "label": "Is this an emergency?",
+        "required": true,
+        "placeholder": "",
+        "options": [
+          "Yes",
+          "No"
+        ],
+        "logic": {
+          "action": "show",
+          "match": "all",
+          "conditions": [
+            {
+              "fieldId": "field-b59ec85c-952e-4e28-ba73-5524dc73f370",
+              "operator": "is_not_empty"
+            }
+          ]
+        }
+      },
+      {
+        "id": "field-43938b4d-244c-4f2c-bef4-e069d96e192f",
+        "type": "select",
+        "label": "Preferred Method of Communication",
+        "required": true,
+        "placeholder": "",
+        "options": [
+          "Email",
+          "Phone",
+          "Text"
+        ],
+        "logic": {
+          "action": "show",
+          "match": "all",
+          "conditions": [
+            {
+              "fieldId": "field-b4f768fb-e85f-40fe-be7b-7e3d3311f087",
+              "operator": "equals",
+              "value": "Yes"
+            }
+          ]
+        }
+      }
+    ],
+    "createdAt": "2026-10-25T16:21:49.781Z",
+    "updatedAt": "2026-10-25T16:23:22.700Z"
+  }
+]

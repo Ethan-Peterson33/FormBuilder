@@ -1,0 +1,51 @@
+[
+  {
+    "id": "yes-no",
+    "name": "Yes / No",
+    "description": "Simple binary choice.",
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "contact-methods",
+    "name": "Contact Methods",
+    "description": "Preferred ways to reach a resident.",
+    "options": [
+      "Email",
+      "Phone",
+      "Text"
+    ],
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "satisfaction-scale",
+    "name": "Satisfaction Scale",
+    "description": "Five-point rating.",
+    "options": [
+      "Very dissatisfied",
+      "Dissatisfied",
+      "Neutral",
+      "Satisfied",
+      "Very satisfied"
+    ],
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "properties",
+    "name": "Properties",
+    "description": "",
+    "options": [
+      "Property 1",
+      "Property 2",
+      "Property 3"
+    ],
+    "createdAt": "2026-10-25T16:19:08.593Z",
+    "updatedAt": "2026-10-25T16:19:08.593Z"
+  }
+]

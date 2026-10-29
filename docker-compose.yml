@@ -1,0 +1,52 @@
+# PostgreSQL for the Form, Table and Workflow Builder.
+#
+#   docker compose up -d             start the database (first start applies backend/db/migrations)
+#   docker compose down              stop it, keep the data
+#   docker compose down -v           stop it and DELETE the data (next start re-creates the schema)
+#   docker compose --profile tools up -d   also start Adminer on http://localhost:8080
+#
+# Settings come from .env (copy .env.example). See docs/database.md.
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: formbuilder-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-formbuilder}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-formbuilder}
+      POSTGRES_DB: ${POSTGRES_DB:-formbuilder}
+      # Byte-order collation so ORDER BY matches the JSON repositories' Python sort
+      # and behaves identically on every host.
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C.UTF-8"
+    ports:
+      - "${POSTGRES_PORT:-55432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # The official image runs *.sql files from this directory, in name order,
+      # the first time the data volume is initialised. The same files are
+      # applied to existing databases with `python -m db.migrate`.
+      - ./backend/db/migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-formbuilder} -d ${POSTGRES_DB:-formbuilder}"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 5s
+
+  # Optional web UI for poking at the database. Opt in with --profile tools.
+  adminer:
+    image: adminer:4
+    container_name: formbuilder-adminer
+    profiles: ["tools"]
+    restart: unless-stopped
+    ports:
+      - "${ADMINER_PORT:-8080}:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Form Builder API - console</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <strong>API console</strong>
+  <nav id="nav">
+    <a href="#health">Health</a>
+    <a href="#tables">Tables</a>
+    <a href="#data">Data</a>
+    <a href="#sql">SQL</a>
+    <a href="#forms">Forms</a>
+    <a href="#option-lists">Option lists</a>
+    <a href="#submissions">Submissions</a>
+    <a href="#request">Raw request</a>
+    <a href="/docs" target="_blank">OpenAPI</a>
+  </nav>
+</header>
+<main id="view"></main>
+<footer id="log" class="log" hidden>
+  <div class="log-head">
+    <span id="log-title">Last request</span>
+    <button type="button" class="link" id="log-toggle">hide</button>
+  </div>
+  <pre id="log-body"></pre>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
