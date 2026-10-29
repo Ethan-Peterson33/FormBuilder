@@ -400,4 +400,9 @@ npm run dev -- --hostname 0.0.0.0
 
 backend start
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
->>>>>>> 51796aca40e50a78169cad2477a96e359d52bd71
+
+
+## License
+
+This project is licensed under the MIT License.
+See the [LICENSE](LICENSE) file for details.
