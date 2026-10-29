@@ -388,18 +388,14 @@ The rules engine exists twice on purpose - `frontend/lib/formLogic.ts` (live sho
 
 ## Development direction
 
-- Data tables: build out [docs/data-tables.md](docs/data-tables.md) (table endpoints, rows, querying, then the grid UI).
-- Authentication, so `submittedBy` is populated from the signed-in user (schema plan phase 2: `users`, attribution columns, `form_versions`).
-- Workflow builder (schema plan phase 4).
-=======
-Just a simple FastAPI endpoint to send images to form for a pdf creation.
 
+ - Data tables: Build out docs/data-tables.md, including table endpoints, rows, querying, and the grid UI.
+ - Frontend dynamic table module: Develop a configurable, reusable table component with dynamic columns, sorting, filtering, pagination, inline editing, and integration with table APIs.
+ - Table data import/export: Support importing and exporting table data in formats such as CSV, Excel, and JSON, including field mapping, data validation, and error handling.
+ - Authentication: Implement user authentication so submittedBy is populated from the signed-in user (schema plan phase 2: users, attribution columns, form_versions).
+ - Notifications: Build a notification system supporting in-app alerts, notification preferences, and event-based triggers for form submissions, workflow actions, and data updates.
+ - Workflow builder: Develop a visual workflow builder for configuring automated processes, conditional logic, approval steps, and event-driven actions (schema plan phase 4).
 
-front end start
-npm run dev -- --hostname 0.0.0.0
-
-backend start
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
 
 ## License
